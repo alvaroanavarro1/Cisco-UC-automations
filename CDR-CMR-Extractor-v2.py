@@ -17,14 +17,14 @@ from io import StringIO
 client = 'CAF'
 
 # SOURCE FILES #
-folder  = r'D:\Desktop-Backup\Temp\ProjectCDR-CMR\Sub-Import-Project\CAF'
+folder  = r'C:\Users\anavarro\OneDrive - SOUTEC\Desktop\Soutec\Cisco-UC-automations'
 file_phone = pd.read_csv("phone.csv", low_memory=False)
 file_gw = pd.read_csv("gateway.csv", low_memory=False)
 file_dp = pd.read_csv("devicepool.csv", low_memory=False)
 file_cfb = pd.read_csv("conferencebridge.csv", low_memory=False)
 file_xcode = pd.read_csv("transcoder.csv", low_memory=False)
 
-folder_data = r'D:\Desktop-Backup\Temp\ProjectCDR-CMR\Sub-Import-Project\CAF\data'
+folder_data = r'C:\Users\anavarro\OneDrive - SOUTEC\Desktop\Soutec\Cisco-UC-automations\data'
 
 # CMR DATA #
 filter_colum_metrics =[
@@ -226,7 +226,7 @@ def execute():
     global Flag
     
     cucmip= '10.200.160.30'
-    driver = webdriver.Firefox(executable_path=r'D:\Document-Backup\Programs\geckodriver-v0.26.0-win64\geckodriver.exe')
+    driver = webdriver.Firefox(executable_path=r'C:\Users\anavarro\OneDrive - SOUTEC\Desktop\Soutec\Cisco-UC-automations\geckodriver.exe')
     driver.get(r'https://{0}/car/'.format(cucmip))
     driver.find_element_by_name('j_username').send_keys('administrator')
     driver.find_element_by_name('j_password').send_keys('ccmcaf2015')
@@ -321,7 +321,7 @@ def execute():
     file_cmr = file_cmr[filter_colum_metrics]
     file_cdr = pd.concat([file_cdr, file_cmr], axis=1, sort=False)
     file_cdr.to_csv('CAF-CDR3.csv')
-    #file_cdr = pd.read_csv('CAF-CDR.csv',low_memory=False)
+    #file_cdr = pd.read_csv('CAF-CDR3.csv',low_memory=False)
     #file_cdr = change(file_cdr)
     #file_cdr.to_csv('file_cdr.csv')
     #copy_func(file_cdr)
