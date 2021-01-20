@@ -166,14 +166,14 @@ def change(file_cdr):
     file_cdr.insert(9, 'destination', 0)
     file_cdr.insert(10, 'concurrency', 0)
     
-    print("Step 1. Please wait. Mapping source/destination and verifying timezones.\n")
+    print("Espere mientras se realiza el link entre telefonos y verificación de horarios\n")
     #file_cdr.to_csv(r'D:\Desktop-Backup\Temp\ProjectCDR-CMR\Sub-Import-Project\CAF\result-test.csv')
     file_cdr['source'] = file_cdr['origDeviceName'].apply(lambda x: get_location(x))
     file_cdr['destination'] = file_cdr['destDeviceName'].apply(lambda x: get_location(x))
     # Mapping Time:
     time_values_loc = ['year','month', 'day', 'hour', 'dateTimeOrigination1', 'dateTimeConnect1', 'dateTimeDisconnect1','dateTimeOrigination', 'dateTimeConnect', 'dateTimeDisconnect', 'source']
     file_cdr[time_values_loc] = file_cdr[time_values_loc].apply(get_time, axis=1)
-    print("Step 1. Done!")
+    print("Listo! El archivo final debe estar en la carpeta")
     
     return file_cdr
 
