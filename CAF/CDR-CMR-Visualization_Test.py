@@ -37,6 +37,25 @@ paises = ['Venezuela', 'Argentina', 'Brasil', 'Bolivia', 'Colombia', 'Espana',
 llamadas_salientes = [Venezuela_origen, Argentina_origen, Brasil_origen, Bolivia_origen, Colombia_origen, Espana_origen, 
 Ecuador_origen, Mexico_origen, Peru_origen, Paraguay_origen, Panama_origen, TYT_origen, Uruguay_origen, Miami_origen]
 
+# Analiza las llamadas entrantes
+Venezuela_destino = destino.count('Venezuela')
+Argentina_destino = destino.count('Argentina')
+Brasil_destino = destino.count('Brasil')
+Bolivia_destino = destino.count('Bolivia')
+Colombia_destino = destino.count('Colombia')
+Espana_destino = destino.count('Espana')
+Ecuador_destino = destino.count('Ecuador')
+Mexico_destino = destino.count('Mexico')
+Peru_destino = destino.count('Peru')
+Paraguay_destino = destino.count('Paraguay')
+Panama_destino = destino.count('Panama')
+TYT_destino = destino.count('TYT')
+Uruguay_destino = destino.count('Uruguay')
+Miami_destino = destino.count('Miami')
+
+llamadas_entrantes = [Venezuela_destino, Argentina_destino, Brasil_destino, Bolivia_destino, Colombia_destino, Espana_destino, 
+Ecuador_destino, Mexico_destino, Peru_destino, Paraguay_destino, Panama_destino, TYT_destino, Uruguay_destino, Miami_destino]
+
 # Gráfica llamadas salientes por país
 
 plt.ylabel('Llamadas por país')
@@ -49,76 +68,167 @@ for r in rects:
 
 plt.show()
 
-# Analiza duración de la llamada
+
+# Gráfica llamadas entrantes por país
+
+plt.ylabel('Llamadas por país')
+plt.title('Número de llamadas entrantes por país')
+rects = plt.bar(paises,llamadas_entrantes, width=0.5)
+
+for r in rects:
+    height = r.get_height() 
+    plt.text(r.get_x() + r.get_width()/2.0, height, '%d' % int(height), ha='center', va='bottom')
+
+plt.show()
+
+
+# Analiza duración de la llamada salientes
 llamadas = len(origen)
-duracion_venezuela = []
-duracion_argentina = []
-duracion_brasil = []
-duracion_bolivia = []
-duracion_colombia = []
-duracion_espana = []
-duracion_ecuador = []
-duracion_mexico = []
-duracion_peru = []
-duracion_paraguay = []
-duracion_panama = []
-duracion_tyt = []
-duracion_uruguay = []
-duracion_miami = []
+duracion_saliente_venezuela = []
+duracion_saliente_argentina = []
+duracion_saliente_brasil = []
+duracion_saliente_bolivia = []
+duracion_saliente_colombia = []
+duracion_saliente_espana = []
+duracion_saliente_ecuador = []
+duracion_saliente_mexico = []
+duracion_saliente_peru = []
+duracion_saliente_paraguay = []
+duracion_saliente_panama = []
+duracion_saliente_tyt = []
+duracion_saliente_uruguay = []
+duracion_saliente_miami = []
 
 for i in range(1, llamadas):
     if 'Venezuela' == origen[i]:
-        duracion_venezuela.append(int(duracion[i]))
+        duracion_saliente_venezuela.append(int(duracion[i]))
 
     elif 'Argentina' == origen[i]:
-        duracion_argentina.append(int(duracion[i]))
+        duracion_saliente_argentina.append(int(duracion[i]))
     
     elif 'Brasil' == origen[i]:
-        duracion_brasil.append(int(duracion[i]))
+        duracion_saliente_brasil.append(int(duracion[i]))
     
     elif 'Bolivia' == origen[i]:
-        duracion_bolivia.append(int(duracion[i]))
+        duracion_saliente_bolivia.append(int(duracion[i]))
     
     elif 'Colombia' == origen[i]:
-        duracion_colombia.append(int(duracion[i]))
+        duracion_saliente_colombia.append(int(duracion[i]))
     
     elif 'Espana' == origen[i]:
-        duracion_espana.append(int(duracion[i]))
+        duracion_saliente_espana.append(int(duracion[i]))
     
     elif 'Ecuador' == origen[i]:
-        duracion_ecuador.append(int(duracion[i]))
+        duracion_saliente_ecuador.append(int(duracion[i]))
     
     elif 'Mexico' == origen[i]:
-        duracion_mexico.append(int(duracion[i]))
+        duracion_saliente_mexico.append(int(duracion[i]))
 
     elif 'Peru' == origen[i]:
-        duracion_peru.append(int(duracion[i]))
+        duracion_saliente_peru.append(int(duracion[i]))
 
     elif 'Paraguay' == origen[i]:
-        duracion_paraguay.append(int(duracion[i]))
+        duracion_saliente_paraguay.append(int(duracion[i]))
 
     elif 'Panama' == origen[i]:
-        duracion_panama.append(int(duracion[i]))
+        duracion_saliente_panama.append(int(duracion[i]))
 
     elif 'TYT' == origen[i]:
-        duracion_tyt.append(int(duracion[i]))
+        duracion_saliente_tyt.append(int(duracion[i]))
     
     elif 'Uruguay' == origen[i]:
-        duracion_uruguay.append(int(duracion[i]))
+        duracion_saliente_uruguay.append(int(duracion[i]))
     
     elif 'Miami' == origen[i]:
-        duracion_miami.append(int(duracion[i]))
+        duracion_saliente_miami.append(int(duracion[i]))
 
 
-duracion_llamadas = [sum(duracion_venezuela)/60, sum(duracion_argentina)/60, sum(duracion_brasil)/60, sum(duracion_bolivia)/60, sum(duracion_colombia)/60,
-sum(duracion_espana)/60, sum(duracion_ecuador)/60, sum(duracion_mexico)/60, sum(duracion_peru)/60, sum(duracion_paraguay)/60, sum(duracion_panama)/60,
-sum(duracion_tyt)/60, sum(duracion_uruguay)/60, sum(duracion_miami)/60]
+duracion_llamadas_salientes = [sum(duracion_saliente_venezuela)/60, sum(duracion_saliente_argentina)/60, sum(duracion_saliente_brasil)/60, sum(duracion_saliente_bolivia)/60, sum(duracion_saliente_colombia)/60,
+sum(duracion_saliente_espana)/60, sum(duracion_saliente_ecuador)/60, sum(duracion_saliente_mexico)/60, sum(duracion_saliente_peru)/60, sum(duracion_saliente_paraguay)/60, sum(duracion_saliente_panama)/60,
+sum(duracion_saliente_tyt)/60, sum(duracion_saliente_uruguay)/60, sum(duracion_saliente_miami)/60]
 
 # Gráfica duración de llamadas por país
 
 plt.ylabel('Duración de Llamadas (minutos)')
 plt.title('Duración de llamadas salientes por país')
-rects = plt.bar(paises,duracion_llamadas, width=0.5)
+rects = plt.bar(paises,duracion_llamadas_salientes, width=0.5)
+
+for r in rects:
+    height = r.get_height() 
+    plt.text(r.get_x() + r.get_width()/2.0, height, '%d' % int(height), ha='center', va='bottom')
+
+plt.show()
+
+
+# Analiza duración de la llamada entrantes
+duracion_entrante_venezuela = []
+duracion_entrante_argentina = []
+duracion_entrante_brasil = []
+duracion_entrante_bolivia = []
+duracion_entrante_colombia = []
+duracion_entrante_espana = []
+duracion_entrante_ecuador = []
+duracion_entrante_mexico = []
+duracion_entrante_peru = []
+duracion_entrante_paraguay = []
+duracion_entrante_panama = []
+duracion_entrante_tyt = []
+duracion_entrante_uruguay = []
+duracion_entrante_miami = []
+
+for i in range(1, llamadas):
+    if 'Venezuela' == destino[i]:
+        duracion_entrante_venezuela.append(int(duracion[i]))
+
+    elif 'Argentina' == destino[i]:
+        duracion_entrante_argentina.append(int(duracion[i]))
+    
+    elif 'Brasil' == destino[i]:
+        duracion_entrante_brasil.append(int(duracion[i]))
+    
+    elif 'Bolivia' == destino[i]:
+        duracion_entrante_bolivia.append(int(duracion[i]))
+    
+    elif 'Colombia' == destino[i]:
+        duracion_entrante_colombia.append(int(duracion[i]))
+    
+    elif 'Espana' == destino[i]:
+        duracion_entrante_espana.append(int(duracion[i]))
+    
+    elif 'Ecuador' == destino[i]:
+        duracion_entrante_ecuador.append(int(duracion[i]))
+    
+    elif 'Mexico' == destino[i]:
+        duracion_entrante_mexico.append(int(duracion[i]))
+
+    elif 'Peru' == destino[i]:
+        duracion_entrante_peru.append(int(duracion[i]))
+
+    elif 'Paraguay' == destino[i]:
+        duracion_entrante_paraguay.append(int(duracion[i]))
+
+    elif 'Panama' == destino[i]:
+        duracion_entrante_panama.append(int(duracion[i]))
+
+    elif 'TYT' == destino[i]:
+        duracion_entrante_tyt.append(int(duracion[i]))
+    
+    elif 'Uruguay' == destino[i]:
+        duracion_entrante_uruguay.append(int(duracion[i]))
+    
+    elif 'Miami' == destino[i]:
+        duracion_entrante_miami.append(int(duracion[i]))
+
+
+duracion_llamadas_entrante = [sum(duracion_entrante_venezuela)/60, sum(duracion_entrante_argentina)/60, sum(duracion_entrante_brasil)/60, sum(duracion_entrante_bolivia)/60, sum(duracion_entrante_colombia)/60,
+sum(duracion_entrante_espana)/60, sum(duracion_entrante_ecuador)/60, sum(duracion_entrante_mexico)/60, sum(duracion_entrante_peru)/60, sum(duracion_entrante_paraguay)/60, sum(duracion_entrante_panama)/60,
+sum(duracion_entrante_tyt)/60, sum(duracion_entrante_uruguay)/60, sum(duracion_entrante_miami)/60]
+
+# Gráfica duración de llamadas por país
+
+plt.ylabel('Duración de Llamadas (minutos)')
+plt.title('Duración de llamadas entrantes por país')
+rects = plt.bar(paises,duracion_llamadas_entrante, width=0.5)
 
 for r in rects:
     height = r.get_height() 
