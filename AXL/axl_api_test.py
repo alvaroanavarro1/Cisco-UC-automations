@@ -8,6 +8,8 @@ from requests.auth import HTTPBasicAuth
 from urllib3 import disable_warnings
 from urllib3.exceptions import InsecureRequestWarning
 from lxml import etree
+import time
+
 
 disable_warnings(InsecureRequestWarning)
 username = 'administrator'
@@ -32,8 +34,14 @@ def show_history():
         print(etree.tostring(item["envelope"], encoding="unicode", pretty_print=True))
 
 try:
-    resp = service.listPhone(searchCriteria={'name': 'SEP'}, 
+    time.sleep(5)
+    resp = service.listPhone(searchCriteria={'name': '%'}, 
                              returnedTags={'name': '', 'description': ''})
+                            
     print(resp)
+    phone_list = resp['return'].phone
+    #for phone in phone_list:
+        #print(phone.name)
+        
 except Fault:
     show_history()
