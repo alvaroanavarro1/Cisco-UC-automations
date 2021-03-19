@@ -4,11 +4,14 @@ from datetime import datetime, timedelta
 import csv
 import numpy as np
 
-df_1 = pd.read_csv ('reporte.csv', usecols= ['Device Name','MAC Address','Status', 'Description', 'Device Pool', 'Device Type'], low_memory=False)
-df_new1 = df_1.rename(columns={'Device Name': 'Device', 'MAC Address' : 'MAC', 'Device Pool' : 'DP', 'Device Type' : 'DT'})
+df_1 = pd.read_csv ('reporte.csv', usecols= ['Device Name','Status'], low_memory=False)
+df_new1 = df_1.rename(columns={'Device Name': 'Device'})
+#df_new1 = df_new1.to_string(index=False)
+
 
 df_2 = pd.read_csv ('phone.csv', usecols= ['Device Name', 'Description', 'Device Pool', 'Device Type', 'Directory Number 1','Line Text Label 1', 'Owner User ID'], low_memory=False)
 df_new2 = df_2.rename(columns={'Device Name': 'Device', 'Directory Number 1' : 'DirectoryNum', 'Line Text Label 1' : 'Owner', 'Owner User ID' : 'OwnerID'})
+#df_new2 = df_new2.to_string(index=False)
 
 mac = []
 for i in df_new2['Device']:
@@ -159,11 +162,15 @@ df_new2 = df_new2.assign(Site = site)
 
 status = []
 status = df_new1['Status'] 
-df_new2 = df_new2.assign(Status = status) 
+devicename = df_new2['Device']
+orden = []
+
+for v in devicename:
+    orden.append(df_new1.loc[df_new1['Device'] == v, 'Status'].to_string(index=False))
+
+
+df_new2 = df_new2.assign(Status = orden) 
 
 df_new2 = df_new2[['Device', 'MAC', 'Status', 'Description', 'Device Pool', 'Location', 'Media', 'Device Type', 'DirectoryNum', 'Owner', 'OwnerID', 'Site']]
 
 df_new2.to_csv('reporte-final.csv')
-
-
-    

@@ -43,7 +43,7 @@ if tipo == 'internas':
             pais_interno_dia1_4pm = df_new[(df_new.Origen.eq(i)) & (df_new.Hora.str.contains(dia1)) & (df_new.Hora.str.contains("04:")) & (df_new.Hora.str.contains("PM")) & (df_new.Numero.astype(str).map(len) == 4) & (df_new.Duracion.astype(str).map(len) > 0)]
             pais_interno_dia1_5pm = df_new[(df_new.Origen.eq(i)) & (df_new.Hora.str.contains(dia1)) & (df_new.Hora.str.contains("05:")) & (df_new.Hora.str.contains("PM")) & (df_new.Numero.astype(str).map(len) == 4) & (df_new.Duracion.astype(str).map(len) > 0)]
             pais_interno_dia1_6pm = df_new[(df_new.Origen.eq(i)) & (df_new.Hora.str.contains(dia1)) & (df_new.Hora.str.contains("06:")) & (df_new.Hora.str.contains("PM")) & (df_new.Numero.astype(str).map(len) == 4) & (df_new.Duracion.astype(str).map(len) > 0)]
-
+        
             llamadas_internas_dia1 = [len(pais_interno_dia1_7am), len(pais_interno_dia1_8am), len(pais_interno_dia1_9am), len(pais_interno_dia1_10am),
             len(pais_interno_dia1_11am), len(pais_interno_dia1_12pm), len(pais_interno_dia1_1pm), len(pais_interno_dia1_2pm), len(pais_interno_dia1_3pm),
             len(pais_interno_dia1_4pm), len(pais_interno_dia1_5pm), len(pais_interno_dia1_6pm)]
