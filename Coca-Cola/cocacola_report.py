@@ -173,4 +173,4 @@ df_new2 = df_new2.assign(Status = orden)
 
 df_new2 = df_new2[['Device', 'MAC', 'Status', 'Description', 'Device Pool', 'Location', 'Media', 'Device Type', 'DirectoryNum', 'Owner', 'OwnerID', 'Site']]
 
-df_new2.to_csv('reporte-final.csv')
+df_new2.to_csv('reporte-final.csv', index=False)
