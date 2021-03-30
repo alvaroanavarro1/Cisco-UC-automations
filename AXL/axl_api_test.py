@@ -48,132 +48,21 @@ def show_history():
         print(etree.tostring(item["envelope"], encoding="unicode", pretty_print=True))
 
 
-try:
-    time.sleep(5)
-    resp = service.listPhone(searchCriteria={'name': 'SEP%'}, 
-                             returnedTags={'name': '',
-                'description': '',
-                'product': '',
-                'model': '',
-                'class': '',
-                'protocol': '',
-                'protocolSide': '',
-                'callingSearchSpaceName': '',
-                'devicePoolName': '',
-                'commonDeviceConfigName': '',
-                'commonPhoneConfigName': '',
-                'networkLocation': '',
-                'locationName': '',
-                'mediaResourceListName': '',
-                'networkHoldMohAudioSourceId': '',
-                'userHoldMohAudioSourceId': '',
-                'automatedAlternateRoutingCssName': '',
-                'aarNeighborhoodName': '',
-                'loadInformation': '',
-                'traceFlag': '',
-                'mlppIndicationStatus': '',
-                'preemption': '',
-                'useTrustedRelayPoint': '',
-                'retryVideoCallAsAudio': '',
-                'securityProfileName': '',
-                'sipProfileName': '',
-                'cgpnTransformationCssName': '',
-                'useDevicePoolCgpnTransformCss': '',
-                'geoLocationName': '',
-                'geoLocationFilterName': '',
-                'sendGeoLocation': '',
-                'numberOfButtons': '',
-                'phoneTemplateName': '',
-                'primaryPhoneName': '',
-                'ringSettingIdleBlfAudibleAlert': '',
-                'ringSettingBusyBlfAudibleAlert': '',
-                'userLocale': '',
-                'networkLocale': '',
-                'idleTimeout': '',
-                'authenticationUrl': '',
-                'directoryUrl': '',
-                'idleUrl': '',
-                'informationUrl': '',
-                'messagesUrl': '',
-                'proxyServerUrl': '',
-                'servicesUrl': '',
-                'softkeyTemplateName': '',
-                'loginUserId': '',
-                'defaultProfileName': '',
-                'enableExtensionMobility': '',
-                'currentProfileName': '',
-                'loginTime': '',
-                'loginDuration': '',
-                'currentConfig': '',
-                'singleButtonBarge': '',
-                'joinAcrossLines': '',
-                'builtInBridgeStatus': '',
-                'callInfoPrivacyStatus': '',
-                'hlogStatus': '',
-                'ownerUserName': '',
-                'ignorePresentationIndicators': '',
-                'packetCaptureMode': '',
-                'packetCaptureDuration': '',
-                'subscribeCallingSearchSpaceName': '',
-                'rerouteCallingSearchSpaceName': '',
-                'allowCtiControlFlag': '',
-                'presenceGroupName': '',
-                'unattendedPort': '',
-                'requireDtmfReception': '',
-                'rfc2833Disabled': '',
-                'certificateOperation': '',
-                'authenticationMode': '',
-                'keySize': '',
-                'authenticationString': '',
-                'certificateStatus': '',
-                'upgradeFinishTime': '',
-                'deviceMobilityMode': '',
-                'roamingDevicePoolName': '',
-                'remoteDevice': '',
-                'dndOption': '',
-                'dndRingSetting': '',
-                'dndStatus': '',
-                'isActive': 'true',
-                'isDualMode': '',
-                'mobilityUserIdName': '',
-                'phoneSuite': '',
-                'phoneServiceDisplay': '',
-                'isProtected': '',
-                'mtpRequired': '',
-                'mtpPreferedCodec': '',
-                'dialRulesName': '',
-                'sshUserId': '',
-                'digestUser': '',
-                'outboundCallRollover': '',
-                'hotlineDevice': '',
-                'secureInformationUrl': '',
-                'secureDirectoryUrl': '',
-                'secureMessageUrl': '',
-                'secureServicesUrl': '',
-                'secureAuthenticationUrl': '',
-                'secureIdleUrl': '',
-                'alwaysUsePrimeLine': '',
-                'alwaysUsePrimeLineForVoiceMessage': '',
-                'featureControlPolicy': '',
-                'deviceTrustMode': '',
-                'earlyOfferSupportForVoiceCall': '',
-                'requireThirdPartyRegistration': '',
-                'blockIncomingCallsWhenRoaming': '',
-                'homeNetworkId': '',
-                'AllowPresentationSharingUsingBfcp': '',
-                'confidentialAccess': '',
-                'requireOffPremiseLocation': '',
-                'allowiXApplicableMedia': '',
-                'enableCallRoutingToRdWhen':''
-            })
+#try:
+#    time.sleep(5)
+#    resp = service.listPhone(searchCriteria={'name': 'SEP%'}, 
+#                             returnedTags={'name': '',
+#                'description': '',
+#                'Status': 'Registered'
+#            })
             
-    print(resp)
+#    print(resp)
 
 
-except Fault:
-    show_history()
+#except Fault:
+#    show_history()
 
-items = []
+#tems = []
 #for phone in phone_list:
 #    items.append(phone.name)
 
@@ -183,7 +72,7 @@ CmSelectionCriteria = {
     'MaxReturnedDevices': '10',
     'DeviceClass': 'Phone',
     'Model': '255',
-    'Status': 'Any',
+    'Status': 'Registered',
     'NodeName': '',
     'SelectBy': 'Name',
     'SelectItems': {
@@ -196,7 +85,7 @@ CmSelectionCriteria = {
 StateInfo = ''
 
 try:
-    #time.sleep(5)
+    time.sleep(5)
     resp = client.service.selectCmDeviceExt(CmSelectionCriteria=CmSelectionCriteria, StateInfo=StateInfo)
 except Fault:
     show_history()
