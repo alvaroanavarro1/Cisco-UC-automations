@@ -101,46 +101,46 @@ duracion_saliente_miami = []
 
 for i in range(1, llamadas):
     if 'Venezuela' == origen[i]:
-        duracion_saliente_venezuela.append(int(duracion[i]))
+        duracion_saliente_venezuela.append(float(duracion[i]))
 
     elif 'Argentina' == origen[i]:
-        duracion_saliente_argentina.append(int(duracion[i]))
+        duracion_saliente_argentina.append(float(duracion[i]))
     
     elif 'Brasil' == origen[i]:
-        duracion_saliente_brasil.append(int(duracion[i]))
+        duracion_saliente_brasil.append(float(duracion[i]))
     
     elif 'Bolivia' == origen[i]:
-        duracion_saliente_bolivia.append(int(duracion[i]))
+        duracion_saliente_bolivia.append(float(duracion[i]))
     
     elif 'Colombia' == origen[i]:
-        duracion_saliente_colombia.append(int(duracion[i]))
+        duracion_saliente_colombia.append(float(duracion[i]))
     
     elif 'Espana' == origen[i]:
-        duracion_saliente_espana.append(int(duracion[i]))
+        duracion_saliente_espana.append(float(duracion[i]))
     
     elif 'Ecuador' == origen[i]:
-        duracion_saliente_ecuador.append(int(duracion[i]))
+        duracion_saliente_ecuador.append(float(duracion[i]))
     
     elif 'Mexico' == origen[i]:
-        duracion_saliente_mexico.append(int(duracion[i]))
+        duracion_saliente_mexico.append(float(duracion[i]))
 
     elif 'Peru' == origen[i]:
-        duracion_saliente_peru.append(int(duracion[i]))
+        duracion_saliente_peru.append(float(duracion[i]))
 
     elif 'Paraguay' == origen[i]:
-        duracion_saliente_paraguay.append(int(duracion[i]))
+        duracion_saliente_paraguay.append(float(duracion[i]))
 
     elif 'Panama' == origen[i]:
-        duracion_saliente_panama.append(int(duracion[i]))
+        duracion_saliente_panama.append(float(duracion[i]))
 
     elif 'TYT' == origen[i]:
-        duracion_saliente_tyt.append(int(duracion[i]))
+        duracion_saliente_tyt.append(float(duracion[i]))
     
     elif 'Uruguay' == origen[i]:
-        duracion_saliente_uruguay.append(int(duracion[i]))
+        duracion_saliente_uruguay.append(float(duracion[i]))
     
     elif 'Miami' == origen[i]:
-        duracion_saliente_miami.append(int(duracion[i]))
+        duracion_saliente_miami.append(float(duracion[i]))
 
 
 duracion_llamadas_salientes = [sum(duracion_saliente_venezuela)/60, sum(duracion_saliente_argentina)/60, sum(duracion_saliente_brasil)/60, sum(duracion_saliente_bolivia)/60, sum(duracion_saliente_colombia)/60,
@@ -155,7 +155,7 @@ rects = plt.bar(paises,duracion_llamadas_salientes, width=0.5)
 
 for r in rects:
     height = r.get_height() 
-    plt.text(r.get_x() + r.get_width()/2.0, height, '%d' % int(height), ha='center', va='bottom')
+    plt.text(r.get_x() + r.get_width()/2.0, height, '%d' % float(height), ha='center', va='bottom')
 
 plt.show()
 
@@ -178,46 +178,46 @@ duracion_entrante_miami = []
 
 for i in range(1, llamadas):
     if 'Venezuela' == destino[i]:
-        duracion_entrante_venezuela.append(int(duracion[i]))
+        duracion_entrante_venezuela.append(float(duracion[i]))
 
     elif 'Argentina' == destino[i]:
-        duracion_entrante_argentina.append(int(duracion[i]))
+        duracion_entrante_argentina.append(float(duracion[i]))
     
     elif 'Brasil' == destino[i]:
-        duracion_entrante_brasil.append(int(duracion[i]))
+        duracion_entrante_brasil.append(float(duracion[i]))
     
     elif 'Bolivia' == destino[i]:
-        duracion_entrante_bolivia.append(int(duracion[i]))
+        duracion_entrante_bolivia.append(float(duracion[i]))
     
     elif 'Colombia' == destino[i]:
-        duracion_entrante_colombia.append(int(duracion[i]))
+        duracion_entrante_colombia.append(float(duracion[i]))
     
     elif 'Espana' == destino[i]:
-        duracion_entrante_espana.append(int(duracion[i]))
+        duracion_entrante_espana.append(float(duracion[i]))
     
     elif 'Ecuador' == destino[i]:
-        duracion_entrante_ecuador.append(int(duracion[i]))
+        duracion_entrante_ecuador.append(float(duracion[i]))
     
     elif 'Mexico' == destino[i]:
-        duracion_entrante_mexico.append(int(duracion[i]))
+        duracion_entrante_mexico.append(float(duracion[i]))
 
     elif 'Peru' == destino[i]:
-        duracion_entrante_peru.append(int(duracion[i]))
+        duracion_entrante_peru.append(float(duracion[i]))
 
     elif 'Paraguay' == destino[i]:
-        duracion_entrante_paraguay.append(int(duracion[i]))
+        duracion_entrante_paraguay.append(float(duracion[i]))
 
     elif 'Panama' == destino[i]:
-        duracion_entrante_panama.append(int(duracion[i]))
+        duracion_entrante_panama.append(float(duracion[i]))
 
     elif 'TYT' == destino[i]:
-        duracion_entrante_tyt.append(int(duracion[i]))
+        duracion_entrante_tyt.append(float(duracion[i]))
     
     elif 'Uruguay' == destino[i]:
-        duracion_entrante_uruguay.append(int(duracion[i]))
+        duracion_entrante_uruguay.append(float(duracion[i]))
     
     elif 'Miami' == destino[i]:
-        duracion_entrante_miami.append(int(duracion[i]))
+        duracion_entrante_miami.append(float(duracion[i]))
 
 
 duracion_llamadas_entrante = [sum(duracion_entrante_venezuela)/60, sum(duracion_entrante_argentina)/60, sum(duracion_entrante_brasil)/60, sum(duracion_entrante_bolivia)/60, sum(duracion_entrante_colombia)/60,
@@ -232,6 +232,6 @@ rects = plt.bar(paises,duracion_llamadas_entrante, width=0.5)
 
 for r in rects:
     height = r.get_height() 
-    plt.text(r.get_x() + r.get_width()/2.0, height, '%d' % int(height), ha='center', va='bottom')
+    plt.text(r.get_x() + r.get_width()/2.0, height, '%d' % float(height), ha='center', va='bottom')
 
 plt.show()

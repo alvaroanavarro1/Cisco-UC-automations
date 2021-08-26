@@ -1,8 +1,6 @@
-import matplotlib.pyplot as plt
 import pandas as pd
 from datetime import datetime, timedelta
-import csv
-import numpy as np
+
 
 df_1 = pd.read_csv ('reporte.csv', usecols= ['Device Name','Status'], low_memory=False)
 df_new1 = df_1.rename(columns={'Device Name': 'Device'})
