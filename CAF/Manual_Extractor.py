@@ -2,36 +2,30 @@
 # Se deben descargar los archivos con los siguientes nombres "file_cdr.csv" y "file_cmr.csv"
 
 import pandas as pd
-import os as os
 import re
-import time, threading
-import schedule
 import datetime as dt
 import pytz as pytz
-import time
-from bs4 import BeautifulSoup
-import io
-from io import StringIO
 import csv
-import numpy as np
 import matplotlib.pyplot as plt
 
 ##########################################################################
 #Codigo para la manipulación de data de CDR/CMR
 
 # Archivos necesarios para realizar la extracción
-# El archivo phone.csv debe estar actualizado a la fecha
 
+# El archivo phone.csv debe estar actualizado a la fecha
 file_phone = pd.read_csv("phone.csv", low_memory=False)
 file_gw = pd.read_csv("gateway.csv", low_memory=False)
 file_dp = pd.read_csv("devicepool.csv", low_memory=False)
 file_cfb = pd.read_csv("conferencebridge.csv", low_memory=False)
 file_xcode = pd.read_csv("transcoder.csv", low_memory=False)
 
-
+# Archivos auxileares en caso de no encontrar el equipo, se deben actualizar todos los meses, están ordenados del más viejo al más nuevo
+aux_file_phone_1 = pd.read_csv("phone-viejo1.csv", low_memory=False)
+aux_file_phone_2 = pd.read_csv("phone-viejo2.csv", low_memory=False)
+aux_file_phone_3 = pd.read_csv("phone-viejo3.csv", low_memory=False)
 
 # TIME ZONES #
-
 Argentina = {'site':'Argentina', 'timezone': 'America/Argentina/Buenos_Aires'}
 Brasil = {'site':'Brasil', 'timezone':'Etc/GMT+3'}
 Bolivia = {'site':'Bolivia', 'timezone': 'America/La_Paz'}
@@ -49,10 +43,9 @@ Miami =  {'site':'Miami', 'timezone':'America/New_York'}
 sites = [Argentina,Brasil,Bolivia,Colombia,Espana,Ecuador,Mexico,Peru,Paraguay,Panama,TYT,Uruguay,Venezuela,Miami]
 
 # Función que linkea dirección MAC del telefono con país de origen
-
 def get_location(DeviceName):
     value = str(DeviceName)
-    print(value)
+    #print(value)
 
     if value == 'csfms38680':
         aux_value = 'Venezuela'
@@ -63,7 +56,26 @@ def get_location(DeviceName):
         # Busco DeviceName en archivo phone.csv, mapeo el Device Pool. Luego Busco Device Pool en archivo devicepool.csv y mapeo DATE/TIME GROUP.
         file_temp = file_phone.loc[file_phone['Device Name'].str.contains(value, case=False)]
         file_reindex = file_temp.reset_index(drop=True)
-        aux_value = str(file_reindex.at[0, 'Device Pool'])
+        if file_reindex.shape[0] > 0:
+            aux_value = str(file_reindex.at[0, 'Device Pool'])
+        else:
+            file_temp = aux_file_phone_3.loc[aux_file_phone_3['Device Name'].str.contains(value, case=False)]
+            file_reindex = file_temp.reset_index(drop=True)
+            if file_reindex.shape[0] > 0:
+                aux_value = str(file_reindex.at[0, 'Device Pool'])
+            else:
+                file_temp = aux_file_phone_2.loc[aux_file_phone_2['Device Name'].str.contains(value, case=False)]
+                file_reindex = file_temp.reset_index(drop=True)
+                if file_reindex.shape[0] > 0:
+                    aux_value = str(file_reindex.at[0, 'Device Pool'])
+                else:
+                    file_temp = aux_file_phone_1.loc[aux_file_phone_1['Device Name'].str.contains(value, case=False)]
+                    file_reindex = file_temp.reset_index(drop=True)
+                    if file_reindex.shape[0] > 0:
+                        aux_value = str(file_reindex.at[0, 'Device Pool'])
+                    else:
+                        print("No se encontró el Device Pool de "+value+" en ninguno de los archivos de teléfono\n")
+                        aux_value = ""
         file_temp = file_dp.loc[file_dp['DEVICE POOL NAME'].str.contains(aux_value, case=False)]
         file_reindex = file_temp.reset_index(drop=True)
         aux_value = str(file_reindex.at[0, 'DATE/TIME GROUP']).split(sep='_')[1]
@@ -81,18 +93,11 @@ def get_location(DeviceName):
         return aux_value
 
 
-    elif re.match('^CFB_[0-9].*$|^ANN_[0-9].*$|^MTP_[0-9].*$|^EXTMTP.*$', value):
+    elif re.match('^CFB_[0-9].*$|^ANN_[0-9].*$|^MTP_[0-9].*$|^EXTMTP.*$', value) or re.match('^Parking.*$|^CAF.*$|^CiscoUM1.*', value) or re.match('^Conductor.*$|^HD_bridge.*$|^MCU.*$', value):
         #print('3')
         aux_value = 'Miami'
-        
         return aux_value
-    
-    elif re.match('^Conductor.*$|^HD_bridge.*$|^MCU.*$', value):
-        #print('4')
-        aux_value = 'Miami'
-        
-        return aux_value
-    
+       
     elif re.match('^CFB.*$', value):
         #print('5')
         file_temp = file_cfb.loc[file_cfb['NAME'].str.contains(value, case=False)]
@@ -111,17 +116,10 @@ def get_location(DeviceName):
         file_temp = file_dp.loc[file_dp['DEVICE POOL NAME'].str.contains(aux_value)]
         file_reindex = file_temp.reset_index(drop=True)
         aux_value = str(file_reindex.at[0, 'DATE/TIME GROUP']).split(sep='_')[1]
-
         return aux_value
     
-    elif re.match('^Parking.*$|^CAF.*$|^CiscoUM1.*', value):
-        #print('7')
-        aux_value = 'Miami'
-        
-        return aux_value
 
 # Función que transforma el tiempo crudo de los archivos
-
 def get_time(x):
 
     source = str(x.source)
@@ -149,11 +147,9 @@ def get_time(x):
                 x_new.dateTimeDisconnect = dt.datetime.fromtimestamp(x_new.dateTimeDisconnect).astimezone(time_zone).strftime(r'%d/%b/%Y, %I:%M, %p')
                 x_new.source = x.source
                 return x_new
-                break
             except:
                 pass
                 return x_new
-                break
         else:
             None
 
@@ -190,7 +186,6 @@ file_cmr = pd.read_csv('file_cmr.csv',low_memory=False)
 
 # CMR DATA #
 filter_colum_metrics =[
-
 'orignumberPacketsSent',
 'orignumberPacketsReceived','orignumberPacketsLost','origjitter','origlatency','destnumberPacketsSent',
 'destnumberPacketsReceived','destnumberPacketsLost','destjitter','destlatency'
