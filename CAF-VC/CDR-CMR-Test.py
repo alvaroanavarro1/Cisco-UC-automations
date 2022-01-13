@@ -1,16 +1,9 @@
 import pandas as pd
 import re
-import os as os
 import re
-import time, threading
-import schedule
 import datetime as dt
 import pytz as pytz
-import time
-import io
-from io import StringIO
 import csv
-import numpy as np
 import matplotlib.pyplot as plt
 
 
@@ -163,8 +156,8 @@ def change(file_cdr):
 
 # Lectura de archivos y aplicación de formato a los mismos
 
-file_cdr = pd.read_csv('cdrprueba.csv',low_memory=False)
-file_cmr = pd.read_csv('cmrprueba.csv',low_memory=False)
+file_cdr = pd.read_csv('cdr.csv',low_memory=False)
+file_cmr = pd.read_csv('cmr.csv',low_memory=False)
 
 # CMR DATA #
 filter_colum_metrics =[
