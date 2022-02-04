@@ -75,6 +75,11 @@ def get_location(DeviceName):
         file_temp = file_cfb.loc[file_cfb['NAME'].str.contains(value, case=False)]
         file_reindex = file_temp.reset_index(drop=True)
         aux_value = file_reindex.at[0, 'DEVICE POOL'] 
+        if aux_value != aux_value:
+            aux_value = file_reindex.at[0, 'SIPTRUNK NAME']
+            file_temp = file_tk.loc[file_tk['DEVICE NAME'].str.contains(aux_value, case=False)]
+            file_reindex = file_temp.reset_index(drop=True)
+            aux_value = file_reindex.at[0, 'DEVICE POOL']
         file_temp = file_dp.loc[file_dp['DEVICE POOL NAME'].str.contains(aux_value, case=False)]
         file_reindex = file_temp.reset_index(drop=True)
         aux_value = str(file_reindex.at[0, 'DATE/TIME GROUP']).split(sep='_')[1]
